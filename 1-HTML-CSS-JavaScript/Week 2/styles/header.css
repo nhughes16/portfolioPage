@@ -1,0 +1,37 @@
+header{
+    background: darkblue;
+    width: 100vw;
+    height: 10vh;
+    margin: auto;
+    padding: 3rem 0;
+}
+
+nav li{
+    display: inline-block;
+    margin:auto;
+    width: 30%;
+    font-size: 3rem;
+}
+
+header audio{
+    margin: auto;
+    display: inline-block;
+    float: right;
+}
+
+a{
+    color:red;
+}
+
+a:visited{
+    color:red;
+}
+
+a:hover{
+    color:white !important;
+    text-align:center;
+}
+
+test{
+    background-color: rgb(221, 162, 0);
+}

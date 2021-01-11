@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+
+    <style>
+        img{
+            position: absolute;
+        }
+
+        div{
+            position: absolute;
+            width: 500px;
+            height: 500px;
+        }
+
+        .hidden{
+            display: none;
+        }
+
+        #rightSide{
+            left: 500px;
+            border-left: 1px solid;
+        }
+    </style>
+</head>
+<body onload='generateFaces()'>
+    <h1>Matching Game</h1>
+
+    <p>Click on the extra smiling face on the left.</p>
+    
+
+    <label>Choose your difficulty:</label>
+    <input type='radio' id='easy' name='difficulty' value='3' onchange='getDifficulty()'>
+    <label for='easy'>Easy</label>
+    <input type='radio' id='normal' name='difficulty' value='5' onchange='getDifficulty()' checked>
+    <label for='normal'>Normal</label>
+    <input type='radio' id='hard' name='difficulty' value='8' onchange='getDifficulty()'>
+    <label for='hard'>Hard</label>
+    
+    <button id='reset' class="hidden" type='button' onclick='reload()'>Restart Game</button> 
+    
+    <p id='results'></p>
+    
+    <div id="game">
+        <div id="leftSide">
+
+        </div>
+
+        <div id="rightSide">
+
+        </div>
+    </div>
+
+
+    <script>
+        let gameDifficulty = 5;
+        let numFaces = gameDifficulty;
+        let rounds = 0;
+        const theLeftSide = document.getElementById('leftSide');
+        const theRightSide = document.getElementById('rightSide');
+        const results = document.getElementById('results');
+
+        document.getElementById('game').addEventListener('click', failure);
+
+        function generateFaces(){
+            for(let i = 0; i < numFaces; i++){
+                let face = document.createElement('img');
+                face.src = 'images/smile.png';
+
+                let randomTop = Math.floor((Math.random() * 400)+ 1);
+                face.style.top = randomTop + 'px';
+
+                let randomLeft = Math.floor((Math.random() * 400) + 1);
+                face.style.left = randomLeft + 'px';
+
+                theLeftSide.appendChild(face);
+            }
+
+            theLeftSide.lastElementChild.addEventListener('click', nextLevel);
+
+            const leftSideImages = theLeftSide.cloneNode(true);
+            leftSideImages.removeChild(leftSideImages.lastChild);
+            theRightSide.appendChild(leftSideImages);
+        }
+
+
+        function nextLevel(){
+            event.stopPropagation();
+            numFaces += gameDifficulty;
+            rounds++;
+            removeChildren();
+            generateFaces();
+        }
+
+
+        function failure(){
+            results.innerHTML = 'Game Over! You made it through ' + rounds + ' rounds!';
+            document.body.style.background = 'red';
+        
+            document.getElementById('game').removeEventListener('click', failure);
+            theLeftSide.lastChild.removeEventListener('click', nextLevel);
+            
+            document.getElementById('reset').className = '';
+        }
+
+        
+        function getDifficulty(){
+            let difficulty = document.getElementsByName('difficulty');
+            for(levels of difficulty){
+                if(levels.checked === true){
+                    gameDifficulty = Number(levels.value);
+                    numFaces = Number(levels.value);
+                }
+            }
+            reload();
+        }
+
+
+        function removeChildren(){
+            while(theLeftSide.firstChild){
+                theLeftSide.removeChild(theLeftSide.firstChild);
+            }
+            
+            while(theRightSide.firstChild){
+                theRightSide.removeChild(theRightSide.firstChild);
+            }
+        }
+
+
+        function reload(){
+            document.body.style.background = 'white';
+            results.innerHTML="";
+            document.getElementById('reset').className = 'hidden';
+            document.getElementById('game').addEventListener('click', failure);
+
+            rounds = 0; 
+            numFaces = gameDifficulty;
+
+            removeChildren();
+            generateFaces();
+        }
+    </script>
+</body>
+</html>

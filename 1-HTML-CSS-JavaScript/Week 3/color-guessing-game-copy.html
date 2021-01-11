@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Guessing Game</title>
+</head>
+<body onload="createRadios()">
+    <h1>Color Guessing Game</h1>
+
+    <button type="button" onclick="runGame()">Start Here</button>
+
+    <div id='radios'>
+
+    </div>
+
+    <script>
+        const COLORS_ARRAY = ['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'yellow'];
+
+        function runGame(){
+            let guess = '';
+            let correct = false;
+            let numTries = 0;
+    
+            let targetIndex = Math.floor(Math.random() * COLORS_ARRAY.length);
+    
+            const TARGET = COLORS_ARRAY[targetIndex];
+
+            console.log('Target = ' + TARGET);
+    
+            do{
+                guess = document.getElementsByName('colors');// prompt('I am thinking of one of these colors:\n\n' + COLORS_ARRAY.sort().join(", ") + '\n\nWhat color am I thinking of?').toLowerCase();
+
+                if(guess === null){
+                    alert('You have aborted the game.\n\n Thanks for playing!');
+                   return;
+                }
+                numTries++;
+
+                correct = checkGuess(guess, TARGET, numTries);
+            } while (!correct);
+
+            alert('Congratulations You have guessed the color!\n\nIt took you ' + numTries + ' guesses to finish the game!\n\nHit OK to see the color in the background.');
+            document.body.style.background = guess;
+        }
+    
+        function checkGuess(guess, TARGET, numTries){
+            let correct = false;
+    
+            if(!COLORS_ARRAY.includes(guess)){
+                alert("Sorry I don't recognize your color.\n\nYou have guessed " + numTries + " so far.\n\nPlease try again.");
+            } else if (TARGET < guess){
+                alert("Sorry, your guess is incorrect.\n\nHint your color is alphabetically higher than mine.\n\nYou have guessed " + numTries + " so far.\n\nPlease try again.");
+            } else if (TARGET > guess){
+                alert("Sorry, your guess is incorrect.\n\nHint your color is alphabetically lower than mine.\n\nYou have guessed " + numTries + " so far.\n\nlease try again.");
+            } else {
+                correct = true;
+            }
+    
+            return correct;
+        }
+
+        function createRadios(){
+            for(let i = 0; i < COLORS_ARRAY.length; i++){
+                let currentColor = COLORS_ARRAY[i];
+
+                let radio = document.createElement('input');
+                console.log('node created');
+                radio.type = 'radio';
+                console.log('type set');
+                radio.id = COLORS_ARRAY[i];
+                console.log('id set');
+                radio.name = 'colors';
+                console.log('name set');
+                radio.value = COLORS_ARRAY[i];
+                console.log('value set');
+
+                let label = document.createElement('label');
+                label.htmlFor = COLORS_ARRAY[i];
+                label.value = COLORS_ARRAY[i];
+                label.textContent = COLORS_ARRAY[i];
+
+                document.getElementById('radios').appendChild(radio);
+                document.getElementById('radios').appendChild(label);
+            }
+            
+        }
+    </script>
+</body>
+</html>

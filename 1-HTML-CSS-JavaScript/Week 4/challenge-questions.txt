@@ -1,0 +1,54 @@
+1. All there parts are required for the loop to function properly, however, they can be called inside the loop brackets. The initializer can be called before, while the codition and expression can be inside the loop brackets
+
+    let i = 0;
+
+    for( ; ; ){
+
+        if(i > 5){
+            break;
+        }
+
+        i++;
+    }
+
+    This would work, but it is alot easier, and cleaner to just use
+
+    for(let i = 0; i < 5; i++)
+
+    this would also free up the ram space take by i after the loop has ended, whereas i would still exist in ram afer the loop has ended when initilized before.
+
+2. myArray.isArray(); This returns a boolean value based on if myArray is or is not an array.
+
+    if(myArray.isArray()){
+        alert("Variable myArray is an array!");
+    } else{
+        alert("We failed.....");
+    }
+
+
+3. myString.searh("text"); This returns a numeric value for the locatin of the first character of a string exsists (starting at 0 like an array). this will return -1 the string you search for does not exist inside the string you are searching.
+
+    let myString = "Some random text";
+    let location = myString.search('random');
+
+
+    when complete the value of location will be 5.
+
+4. '\t' creates a tab inside a string.
+
+5. node.innerHTML - lets you return or set the content inside an html tag
+
+    node.querySelector('p').innterhtml = "I have changed the text inside the first paragraph element on this page";
+
+6. This would return the full tag and its contents as a string
+
+    let removed = node.removeChild();
+
+    removed could be "<li>list item 1</li>"
+
+7. The node will get inserted a second time, before the previous insert.
+
+8. onChange - this event is tiggered when an HTML element is changed.
+
+9. It would sort the array in assending order: [1, 13, 29, 255, 1000]
+

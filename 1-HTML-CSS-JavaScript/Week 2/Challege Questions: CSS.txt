@@ -1,0 +1,44 @@
+Question 1:
+    you can use rgb or hsl
+    background-color: rbg(255,125,0);
+    background-color: hsl(255, 60%, 50%);
+
+Question 2:
+    #fff is correct because it is the same as saying #ffffff, it is just shorted to use only the first digit of each 2 digit code.
+    #ffffff44 is correct because #ffffff is the color (white) and 44 sets the transperancy of that color
+
+Question 3:
+    1st: top
+    2nd: right & left
+    3rd: bottom
+
+Question 4:
+    em and rem are relative sizes. 2em would be 2 times the size the of the current element size. em is stackable and multiples size within stacked elements
+    rem is very similar to em however, it is relative to the root element and thus will not stack (or multiply each time it is stacked)
+
+Question 5:
+    list-style can be broken into 3 things
+
+    list-style-image
+    list-style-postion: being inside or outside (this affect where subsequent line of text align, either under the other text (outside) or under the bullet point (inside))
+    list-style-type: being the shape of the bullet point
+
+    or writen short hand with all 3 into list-style:
+
+    ul{
+        list-style: 
+    }
+
+Question 6:
+    pseudo-elements have a sytax of element::psuedo-element
+
+    one example of this is:
+    
+    p::first-letter{
+
+    }
+
+    This would apply specific css to the first leter of a paragraph.
+
+Question 7:
+    The !important rule in CSS means that any subsequent rules for that item will be ignored. This should be avoided because it essentially contradicts the fact that CSS is cascading.
